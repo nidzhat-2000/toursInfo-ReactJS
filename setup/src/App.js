@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Loading from "./Loading.jsx";
-import Tours from "./Tours.jsx";
+import React, { useState, useEffect } from 'react';
+import Loading from './Loading.jsx';
+import Tours from './Tours.jsx';
 
-const url = "https://course-api.com/react-tours-project";
+const url = 'https://course-api.com/react-tours-project';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +26,11 @@ const App = () => {
     fetchTours();
   }, []);
 
+  const removeTour = id => {
+    const newTours = tours.filter(removedTour => removedTour.id !== id);
+    setTours(newTours);
+  };
+
   if (loading) {
     return (
       <main>
@@ -35,9 +40,22 @@ const App = () => {
   }
   // {loading && <main> <Loading /> </main> }
 
+  if (tours.length === 0) {
+    return (
+      <main>
+        <div className="title">
+          <h2>No tours left</h2>
+          <button className="btn" onClick={() => fetchTours()}>
+            refresh
+          </button>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main>
-      <Tours tours={tours} />
+      <Tours tours={tours} removeTour={removeTour} />
     </main>
   );
 };

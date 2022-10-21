@@ -5,7 +5,7 @@ const Tours = ({ tours, removeTour }) => {
     <section>
       <div className="title">
         <h2>our tours</h2>
-        {/* <div className="underline"></div> */}
+        <div className="underline"></div>
       </div>
       <div>
         {tours.map(eachTour => {
